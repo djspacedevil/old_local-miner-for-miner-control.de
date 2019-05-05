@@ -1,0 +1,76 @@
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Update-Status</span>
+			{function="showGoBackIcon('?s=settings')"}
+		</div>
+{if="$update_file_status_error == true"}
+		<div class="inner-bottom">
+			<strong class="red">Einige Dateien/Ordner bieten nicht ausreichend Berechtigungen. Daher kann ein Update erst ausgeführt werden, wenn die Berechtigungen geboten sind. <a href="?s=settings&amp;do=trouble-shooting">Versuchen das Problem zu beheben.</a> {function="showHelper('update-kann-aufgrund-fehlender-berechtigungen-nicht-ausgefuehrt-werden')"}</strong>
+		</div>
+{/if}
+{if="is_array($update_status)"}
+		<div class="inner-bottom">
+			<strong class="red">Dein Pi Control ist in der Version {$config_version} installiert und nicht mehr aktuell.</strong>
+		</div>
+		<div class="inner">
+			<strong class="green">Version {$update_status.version} ist verfügbar und steht zum Herunterladen bereit.</strong><br /><br /><a name="innovations"></a>
+			<strong>Neuerungen in {$update_status.version}:</strong><br />
+			{$update_status.log}
+		</div>
+{elseif="$update_status == 0"}
+		<div class="inner">
+			<strong class="green">Dein Pi Control ist in der aktuellen Version {$config_version} installiert.</strong>
+		</div>
+{elseif="$update_status == 1"}
+		<div class="inner">
+			<strong class="green">Fehler beim überprüfen auf ein Update. Konnte Updatedatei nicht lesen.</strong>
+		</div>
+{elseif="$update_status == 2"}
+		<div class="inner">
+			<strong class="red">Dein Pi Control ist in der Version {$config_version} installiert und kann nicht auf Aktualität geprüft werden, da keine Verbindung zum Updateserver hergestellt werden konnte.</strong>
+		</div>
+{elseif="$update_status == 3"}
+		<div class="inner">
+			<strong class="red">Dein Pi Control ist in der Version {$config_version} installiert und kann nicht auf Aktualität geprüft werden, da keine Verbindung zum Internet hergestellt werden konnte. Bitte prüfe die Verbindung des Raspberry Pi und deines Routers.</strong>
+		</div>
+{elseif="$update_status == 4"}
+			<strong class="red">Dein Pi Control ist in der Version {$config_version} installiert und kann nicht auf Aktualität geprüft werden, da erforderliche Funktion nicht verfügbar. Bitte aktiviere allow_url_fopen().</strong>
+{/if}
+	</div>
+</div>
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>E-Mail Benachrichtigung</span>
+		</div>
+		<div class="inner-bottom justify">
+			Wenn du zukünftig eine E-Mail bei einer neuen Version des Pi Control erhalten möchtest, dann kannst du dich über den folgendem Button in die Liste eintragen.
+		</div>
+		<div class="inner">
+			<a href="{$config_mail_url}?s=update_notification" target="_blank"><button>E-Mail eintragen</button></a>
+		</div>
+	</div>
+</div>
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Update installieren</span>
+		</div>
+		<div class="inner-bottom">
+			Mit dieser Funktion lädst du das neuste Update Paket runter und installierst es anschließend.
+		</div>
+		<div class="inner">
+{if="is_array($update_status) && $update_file_status_error == false"}
+			<a href="?s=settings&amp;do=update&amp;update" style="text-decoration: none;"><input type="button" value="Update runterladen &amp; installieren" /></a> Updategröße: {$update_status.filesize}
+{elseif="$update_status == 0"}
+			<input type="button" value="Update runterladen &amp; installieren" style="opacity: 0.5;" /> <strong class="green">Derzeit steht kein Update zur Verfügung.</strong>
+{else}
+			<input type="button" value="Update runterladen &amp; installieren" style="opacity: 0.5;" /> <strong class="red">Hinweis oben beachten.</strong>
+{/if}
+		</div>
+	</div>
+</div>
+<div class="clear_both"></div>

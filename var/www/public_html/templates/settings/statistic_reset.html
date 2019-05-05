@@ -1,0 +1,17 @@
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Einstellungen zur Statistik - Verlauf zurücksetzen</span>
+			{function="showGoBackIcon('?s=settings&amp;do=statistic')"}
+		</div>
+		<form action="?s=settings&amp;do=statistic&amp;reset={$log}&amp;confirm" method="post">
+			<div class="inner-bottom">
+				Möchtest du wirklich den Verlauf von <strong>{$label}</strong> zurücksetzen?
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit" value="Zurücksetzen" />
+			</div>
+		</form>
+	</div>
+</div>

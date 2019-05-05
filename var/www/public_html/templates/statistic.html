@@ -1,0 +1,105 @@
+<noscript>
+<div>
+	<div class="info_red box">
+		<div class="inner">
+			<strong>Bitte aktiviere JavaScript, um dir die Statistiken anzusehen.</strong>
+		</div>
+	</div>
+</div>
+</noscript>
+<!-- Container -->
+<div>
+	<div class="box">
+		<div class="inner-header no-border-bottom">
+			<span>Statistik</span>
+			{function="showSettingsIcon('?s=settings&amp;do=statistic')"}
+		</div>
+	</div>
+{if="empty($logArray) && $logArrayCount > 0"}
+	<div class="box">
+		<div class="inner">
+			<strong class="red">Alle Statistiken sind ausgeblendet!</strong>
+		</div>
+	</div>
+{elseif="empty($logArray)"}
+	<div class="box">
+		<div class="inner">
+			<strong class="red">Es sind noch keine Statistiken verfügbar. Werte werden alle 5 Minuten eingetragen.</strong>
+		</div>
+	</div>
+{/if}
+{loop="logArray"}
+	<div class="box" id="dashboard_log_{$value.log}">
+		<div class="inner-header">
+			<span>{$value.label}</span>
+		</div>
+		<div class="inner text-center padding-0" id="chart_log_{$value.log}">
+			<img src="public_html/img/ajaxloader.gif" style="margin: 20px;" />
+		</div>
+		<div class="inner text-center" id="chart_control_log_{$value.log}">
+		</div>
+	</div>
+{/loop}
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load('visualization', '1', {packages:['controls']});
+	google.setOnLoadCallback(createTable);
+	
+	function createTable()
+	{
+{loop="logArray"}
+		var jsonData = $.ajax({
+			url: "{$statistic_path}/statistic_json.php?type={$value.type}&log={$value.log}",
+			dataType:"json",
+			async: true
+		}).done(function(data)
+		{
+			var myData = new google.visualization.DataTable(data);
+			
+			$('#chart_log_{$value.log}').html('');
+			var myDashboard = new google.visualization.Dashboard(document.getElementById('dashboard_log_{$value.log}'));
+			
+			var myDateSlider = new google.visualization.ControlWrapper({
+				'controlType': 'DateRangeFilter',
+				'containerId': 'chart_control_log_{$value.log}',
+				'options': {
+					'filterColumnLabel': 'Zeit',
+					'ui': {
+						'step': 'hour',
+						'label': '',
+						'format': { 'pattern': 'dd.MM. HH:mm' }
+					}
+				}
+			});
+			
+			var myLine = new google.visualization.ChartWrapper({
+				'chartType' : 'LineChart',
+				'containerId' : 'chart_log_{$value.log}',
+				'options': {
+					vAxis: { title:'{$value.title}' },
+					dateFormat: 'dd.MM.yy HH:mm',
+					hAxis: { format: 'dd.MM. HH:mm' },
+					focusTarget: 'category',
+					crosshair: { orientation: 'vertical', trigger: 'both', color: '#AAAAAA', opacity: 0.4 }
+				}
+			});
+			
+			var formatter = new google.visualization.NumberFormat(
+				{ suffix: '{$value.unit}' }
+			);
+{loop="$value.columns"}
+			formatter.format(myData, {$value});
+{/loop}
+			myDashboard.bind(myDateSlider, myLine);
+			myDashboard.draw(myData);
+		}).fail(function(xhr, textStatus)
+		{
+			if (xhr.status == 412)
+				$('#chart_log_{$value.log}').html('<br /><br /><strong class="red">Es sind noch keine Werte verfügbar. Werte werden alle 5 Minuten eingetragen.</strong>');
+			else
+				$('#chart_log_{$value.log}').html('<br /><br /><strong class="red">Es ist ein Fehler aufgetreten! Fehlercode: '+xhr.status+'</strong>');
+		});
+{/loop}
+	}
+</script>

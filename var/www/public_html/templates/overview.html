@@ -1,0 +1,144 @@
+<script type="text/javascript">{$js_variables}</script>
+<script type="text/javascript" src="public_html/js/overview_status_reload.js"></script>
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>System</span>
+		</div>
+		<div class="inner">
+			<a href="?action=system_restart" onClick="return ((confirm('Willst du deinen Raspberry Pi wirklich neustarten?') == false) ? false : true);"><button class="system_restart">Neustarten</button></a><a href="?action=system_shutdown" onClick="return ((confirm('Willst du deinen Raspberry Pi wirklich herunterfahren?') == false) ? false : true);"><button class="system_shutdown">Herunterfahren</button></a>
+		</div>
+	</div>
+{if="$show_weather === true"}
+	<div class="box">
+		<div class="inner-header">
+			<span>Wetter</span>
+		</div>
+		<div class="inner">
+	{if="$weather === 0"}
+			<strong class="red">Die aktuelle Postleitzahl ist ungültig.</strong>
+	{elseif="$weather === 1"}
+			<strong class="red">Das Wetter kann aktuell nicht abgerufen werden.</strong>
+	{elseif="$weather === 2"}
+			<strong class="red">Wetter wurde noch nicht konfiguriert. <a href="?s=settings&do=overview">Zu den Einstellungen.</a></strong>
+	{else}
+			<strong>{$weather.city}</strong><br /><br />
+			<table style="margin: 0px auto 0px;">
+				<tr>
+					<td style="width: 100px; text-align: center;">
+						<img src="public_html/img/weather/{$weather.icon}.png" title="{$weather.description}" alt="Wetter" /><br />
+						<span style="font-size: 11px;" title="Windstärke | Luftfeuchtigkeit">{$weather.wind} km/h | {$weather.humidity} %</span>
+					</td>
+					<td style="width: 100px; text-align: center;"><span style="font-size: 30px;">
+						{$weather.temp} &deg;C</span><br />
+						<span style="font-size: 13px;">{$weather.temp_min} &deg;C | {$weather.temp_max} &deg;C</span>
+					</td>
+				</tr>
+			</table>
+	{/if}
+		</div>
+	</div>
+{/if}
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Übersicht</span>
+			{function="showSettingsIcon('?s=settings&amp;do=overview')"}
+		</div>
+		<div class="inner">
+			<table class="table _status">
+				<tr>
+					<th>Information</th>
+					<th colspan="2">Wert <a href="#reload" title="Aktualisieren"><img src="public_html/img/refresh.png" class="overview_status_refresh" width="12" alt="Aktualisieren" /></a></th>
+				</tr>
+				<tr>
+					<td class="width-50">Laufzeit / Startzeit</td>
+					<td class="width-25">{$run_time}</td>
+					<td class="width-25">{$start_time}</td>
+				</tr>
+				<tr>
+					<td>CPU-Takt</td>
+					<td colspan="2">{$cpu_clock}</td>
+				</tr>
+				<tr>
+					<td>CPU-Auslastung</td>
+					<td colspan="2" class="padding-0">
+						<div class="overview_status_td">
+							<div class="progress">
+								<div style="width: {$cpu_load};"></div>
+								<div>{$cpu_load}</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>CPU-Typ</td>
+					<td colspan="2">{$cpu_type}</td>
+				</tr>
+				<tr>
+					<td>CPU-Temperatur</td>
+					<td colspan="2">{$cpu_temp}</td>
+				</tr>
+				<tr>
+					<td>RAM</td>
+					<td colspan="2" class="padding-0">
+						<div class="overview_status_td">
+							<div class="progress">
+								<div style="width: {$ram_percentage};"></div>
+								<div>{$ram_percentage}</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Speicher belegt / frei</td>
+					<td>{$memory.used|sizeUnit}</td>
+					<td>{$memory.free|sizeUnit}</td>
+				</tr>
+				<tr>
+					<td>Gesamtspeicher</td>
+					<td colspan="2">{$memory.total|sizeUnit}</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="padding-0">
+						<div class="overview_status_td">
+							<div class="progress">
+								<div style="width: {$memory.percent}%;"></div>
+								<div>{$memory.percent}%</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<div class="overview_status_reload_bar"></div>
+			<div class="overview_display_more">
+				<a href="?s=detailed_overview">Mehr anzeigen</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clear_both"></div>
+{if="is_array($usb_devices)"}
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Angeschlossene Geräte</span>
+		</div>
+		<div class="inner">
+			<table class="table">
+				<tr>
+					<th style="width: 100%;">Bezeichnung</th>
+				</tr>
+{loop="$usb_devices"}
+				<tr>
+					<td>{$value}</td>
+				</tr>
+{/loop}
+			</table>
+		</div>
+	</div>
+</div>
+{/if}

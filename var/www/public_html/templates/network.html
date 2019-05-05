@@ -1,0 +1,104 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-bottom sidebar_navi padding-0">
+			<a href="?s=network">Übersicht</a>
+		</div>
+		<div class="inner sidebar_navi padding-0">
+			<a href="?s=network_configuration">Konfiguration</a>
+		</div>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Traffic</span>
+		</div>
+		<div class="inner">
+			<table class="table">
+				<tr>
+					<th style="width: 20%;">Interface</th>
+					<th style="width: 40%;">Gesendet</th>
+					<th style="width: 40%;">Empfangen</th>
+				</tr>
+{loop="network_connections"}
+				<tr>
+					<td>{$value.interface}</td>
+					<td>{$value.sent|sizeUnit}</td>
+					<td>{$value.receive|sizeUnit}</td>
+				</tr>
+{/loop}
+			</table>
+		</div>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Hostname</span>
+		</div>
+		<div class="inner-bottom justify">
+			Dein Raspberry Pi wird im Netzwerk unter folgendem Namen angezeigt: <strong>{$hostname}</strong>
+		</div>
+		<div class="inner">
+			<a href="?s=network&amp;hostname"><button>Ändern</button></a>
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Netzwerk</span>
+		</div>
+		<div class="inner">
+			<table class="table">
+					<tr>
+						<th style="width: 2%;"></th>
+						<th style="width: 10%;">Interface</th>
+						<th style="width: 44%;">IP</th>
+						<th style="width: 44%;">MAC-Adresse</th>
+					</tr>
+{loop="network_connections"}
+					<tr>
+						<td>{if="isset($value.option.signal)"}{$value.option.signal|getImageFromSignal}{else}
+							{if="$value.ip != 0"}<img src="public_html/img/nm_signal_100.png" />{else}<img src="public_html/img/nm_signal_disable.png" />{/if}
+							{/if}
+						</td>
+						<td>{$value.interface}</td>
+						<td>{if="$value.ip != 0"}<a href="http://{$value.ip}" target="_blank">{$value.ip}</a>{else}Nicht verbunden{/if}</td>
+						<td>{$value.mac}</td>
+					</tr>
+{/loop}
+				</table>
+		</div>
+	</div>
+{loop="wlan"}
+	<div class="box">
+		<div class="inner-header">
+			<span>{$key}</span>
+		</div>
+		<div class="inner">
+			<table class="table">
+				<tr>
+					<th style="width: 1%;"></th>
+					<th style="width: 52%;">Netzwerkname</th>
+					<th style="width: 25%;">MAC-Adresse</th>
+					<th style="width: 17%;">Sicherheit</th>
+					<th style="width: 5%;">Kanal</th>
+				</tr>
+{loop="value"}
+				<tr>
+					<td title="{$value.signal}%">{$value.signal|getImageFromSignal}</td>
+					<td><a href="?s=network_connect&amp;interface={$key1}&amp;ssid={$value.ssid}&amp;encryption={if="$value.encryption == '-'"}2{else}1{/if}">{$value.ssid}</a></td>
+					<td>{$value.mac}</td>
+					<td>{$value.encryption}</td>
+					<td class="text-align-center">{$value.channel}</td>
+				</tr>
+{else}
+				<tr>
+					<td colspan="5"><strong class="red">Keine WLAN-Netzwerke gefunden. <a href="?s=network&amp;refresh_wlan={$key1}">Erneut suchen.</a></strong></td>
+				</tr>
+{/loop}
+			</table>
+		</div>
+	</div>
+{/loop}
+</div>
+<div class="clear_both"></div>

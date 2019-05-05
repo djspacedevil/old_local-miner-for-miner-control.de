@@ -1,0 +1,13 @@
+<!-- Msg -->
+<div id="message_box_{$msg_id}">
+	<div class="box {$msg_color}">
+		{if="$msg_title != ''"}<div class="inner-header">
+			{if="$msg_cancelable"}<img src="public_html/img/delete.png" class="info_cancel" onClick="document.getElementById('message_box_{$msg_id}').style.display='none'" />{/if}
+			<span>{$msg_title}</span>
+		</div>{/if}
+		<div class="inner">
+			{if="$msg_cancelable && $msg_title == ''"}<img src="public_html/img/delete.png" class="info_cancel" onClick="document.getElementById('message_box_{$msg_id}').style.display='none'" />{/if}
+			<strong>{$msg_msg}</strong>
+		</div>
+	</div>
+</div>

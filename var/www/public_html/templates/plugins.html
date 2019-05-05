@@ -1,0 +1,26 @@
+<!-- Container -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Plugins</span>
+			{function="showSettingsIcon('?s=settings&amp;do=plugins')"}
+		</div>
+		<div class="inner-bottom">
+{loop="$all_plugins"}
+			<a href="?s=plugins&amp;id={$value.id}" style="color: inherit; text-decoration: none;">
+				<table class="table_simple table_plugins_list">
+					<tr {if="$counter%2"}class="table_impo_blue"{/if}>
+						<td><span>{$value.name}</span><br /><span>Version {$value.version}</span></td>
+						<td>{$value.description}</td>
+					</tr>
+				</table>
+			</a>
+{else}
+			<strong class="red">Keine Plugins installiert oder alle deaktiviert.</strong>
+{/loop}
+		</div>
+		<div class="inner">
+			<a href="?s=plugin_search"><button>Nach Plugins suchen</button></a>
+		</div>
+	</div>
+</div>

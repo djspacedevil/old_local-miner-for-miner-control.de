@@ -1,0 +1,80 @@
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Problembehandlung</span>
+			{function="showGoBackIcon('?s=settings')"}
+		</div>
+		<div class="inner">
+			Die Problembehandlung kann dir bei Problemen helfen und diese beseitigen.
+		</div>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Datei- und Ordnerberechtigungen</span>
+		</div>
+{if="!empty($file_permission_error_files)"}
+		<div class="inner-bottom">
+			<strong class="red">Folgende Dateien / Ordner bieten nicht ausreichend Berechtigungen. Daher kann es zu Problemen mit einigen Funktionen im Pi Control kommen.</strong><br /><br />
+	{if="count($file_permission_error_files) > 10"}
+		{loop="$file_permission_error_files"}
+			{if="$counter >= 10"}
+			<div class="permission_additional" style="display: none;">
+				- {$value}<br />
+			</div>
+			{else}
+			- {$value}<br />
+			{/if}
+		{/loop}
+		
+		<div class="permission_additional_link"><br />und {$file_permission_error_files_count} weitere. {if="$file_permission_error_files_count == 1"}s{/if} <a href="#" onClick="jQuery('.permission_additional').show(); jQuery('.permission_additional_link').hide(); return false;">Alle anzeigen.</a></div>
+	{else}
+		{loop="$file_permission_error_files"}
+			- {$value}<br />
+		{/loop}
+	{/if}
+		</div>
+		<div class="inner-bottom" align="justify">
+			Damit die Berechtigungen geändert werden, wird der "chown"-Befehl auf das Verzeichnis "{$file_permission_absolute_path}/" angewandt und der Benutzer + Gruppe in {$file_permission_whoaim} geändert. Zudem werden die Dateiberechtigungen auf 644 und die Ordnerberechtigungen auf 755 geändert.
+		</div>
+		<div class="inner">
+			<a href="?s=settings&amp;do=trouble-shooting&amp;file_permission" style="text-decoration: none;"><input type="button" value="Problem beheben" /></a>
+		</div>
+{else}
+		<div class="inner">
+			<strong class="green">Keine Probleme.</strong>
+		</div>
+{/if}
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Cron für das Pi Control</span>
+		</div>
+{if="$cron_config_last_cron_execution+140 < time()"}
+		<div class="inner-bottom">
+			<strong class="red">Der letzte Cron wurde vor ca. {function="getDateFormat(time()-$cron_config_last_cron_execution)"} ausgeführt. Eingestellt ist dieser für jede Minute.</strong><br /><br />
+	{if="$cron_match === 0"}
+			Der Cron konnte nicht in der Crontabelle gefunden werden. Klicke auf "Problem beheben", damit der Cron in die Tabelle eingetragen wird.<br />
+	{/if}
+	{if="empty($cron_paket_status)"}
+			Das Linux-Paket "curl" ist nicht auf deinem Raspberry Pi installiert. Bitte installiere es mittels "apt-get install curl".<br />
+	{/if}
+	{if="$cron_htaccess_check == 'failed'"}
+			Der Zugriffsschutz blockiert das Ausführen des Cron. Zum beheben, bitte den <a href="?s=settings&do=pic">Zugriffsschutz</a> neu anlegen.<br />
+	{/if}
+	{if="$cron_match === 1 && !empty($cron_paket_status) && $cron_htaccess_check == 'successful'"}
+			Leider konnten keine Probleme gefunden werden. Bitte melde das Problem unten unter "Feedback".
+	{/if}
+		</div>
+	{if="$cron_match === 0 || $cron_htaccess_check == 'failed'"}
+		<div class="inner">
+			<a href="?s=settings&amp;do=trouble-shooting&amp;pi_cron" style="text-decoration: none;"><input type="button" value="Problem beheben" /></a>
+		</div>
+	{/if}
+{else}
+		<div class="inner">
+			<strong class="green">Keine Probleme.</strong>
+		</div>
+{/if}
+	</div>
+</div>

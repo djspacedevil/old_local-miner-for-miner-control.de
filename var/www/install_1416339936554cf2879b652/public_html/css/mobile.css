@@ -1,0 +1,96 @@
+@charset "utf-8";
+/* CSS Document */
+
+#header {
+	margin-top: 0px;
+	position: fixed;
+	z-index: 10000000;
+}
+
+#header_logo {
+	display: block;
+	float: right;
+	/*margin: -8px -30px -12px 0px;*/
+	margin: -8px -20px -12px 0px;
+}
+
+#header_logo img {
+	height: 36px;
+}
+
+#header_navi .mobile_menu_content {
+	display: none;
+}
+
+#header_navi a {
+	display: block;
+}
+
+#header_navi {
+	background: none;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	flex-flow: row wrap;
+}
+
+#header_navi .mobile_menu {
+	cursor: pointer;
+	display: inline-block;
+	margin: 0px 0px 0px 20px;
+	-webkit-flex: 0 0 auto;
+	-moz-flex: 0 0 auto;
+	flex: 0 0 auto;
+	height: 20px;
+}
+
+#header_navi label img {
+	vertical-align: bottom;
+}
+
+#header_navi input:checked ~ .mobile_menu_content
+{
+	display: block;
+	-webkit-flex: 0 0 auto;
+	-moz-flex: 0 0 auto;
+	flex: 0 0 auto;
+	margin-top: -5px;
+}
+
+#content {
+	padding: 72px 10px 10px 10px;
+}
+
+#footer {
+	text-align: center;
+}
+
+#footer a {
+	margin: 0px 5px 0px 5px;
+}
+
+#servertime {
+	display: block;
+	float: none;
+	padding: 15px 0 0 0;
+}
+
+#feedback {
+	left: 0;
+	margin-left: 0px;
+	position: absolute;
+	top: 60px;
+	width: 900px;
+	z-index: 9999999;
+}
+
+.sidebar {
+	width: auto;
+	float: none;
+}
+
+.container-600 {
+	width: auto;
+}

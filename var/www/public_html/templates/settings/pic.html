@@ -1,0 +1,128 @@
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Einstellungen zum Pi Control</span>
+			{function="showGoBackIcon('?s=settings')"}
+		</div>
+		<form action="?s=settings&amp;do=pic" method="post">
+			<div class="inner-bottom">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 250px;"><strong>Soll das Pi Control von überall<br />aus dem Internet erreichbar sein?</strong></td>
+						<td><input type="checkbox" name="value" value="checked" {if="$config_access_public"}checked{/if} /> <span class="small_info">ggf. an Port-Weiterletung denken.</span>
+{if="$urlispublic"}
+							<br />
+							<strong class="red">Durch Änderung dieser Einstelllung hast du von Extern keinen Zugriff mehr auf das Pi Control.</strong>
+{/if}</td>
+					</tr>
+					<tr>
+						<td><strong>Slim-Header aktivieren?</strong></td>
+						<td><input type="checkbox" name="slim_header" value="checked" {if="$config_slim_header"}checked{/if} /></td>
+					</tr>
+					<tr>
+						<td><strong>Webserver-Port:</strong></td>
+						<td><input type="text" name="port" style="width: 50px;" value="{$config_webserver_port}" maxlength="5" /> <span class="small_info">Bei Änderung den Cron anpassen.</span> {function="showHelper('wie-passe-ich-den-cron-an-den-port-an')"}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit_main" value="Speichern" />
+			</div>
+		</form>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Zugriffsschutz</span>
+		</div>
+		<form action="?s=settings&amp;do=pic" method="post">
+			<div class="inner-bottom">
+				Für eine hohe Sicherheit verwendet das Pi Control die ".htaccess" und ".htpasswd" Authentifizierung.<br />
+				<strong>Beachte, dass AllowOverride (Apache) aktiviert ist. <a href="http://willy-tech.de/htaccess-auf-apache-aktivieren/" target="_blank">Anleitung</a></strong>
+			</div>
+			<div class="inner-bottom">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 200px;"><strong>Zugriffsschutz aktivieren?</strong></td>
+						<td><input type="checkbox" name="cb_activate" value="checked" {if="$config_access_protection"}checked{/if} /> <span class="small_info">Zugriffsschutz wird für externe Zugriffe dringend empfohlen!</span></td>
+					</tr>
+					<tr>
+						<td><strong>Passwortabfrage für:</strong></td>
+						<td><select name="query">
+								<option value="all" {if="$config_access_protection_option == 'all'"}selected="selected"{/if}>Alle</option>
+								<option value="only_extern" {if="$config_access_protection_option == 'only_extern'"}selected="selected"{/if}>Nur externe Zugriffe</option>
+							</select></td>
+					</tr>
+					<tr>
+						<td><strong>Benutzer:</strong></td>
+						<td><div style="width: 90px; display: inline-block;">Name</div><input type="text" name="ht_name" style="width: 150px;" maxlength="30" /> <span class="small_info">Länge: 2-30 Zeichen. Erlaubt: A-Z a-z 0-9 _</span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><div style="width: 90px; display: inline-block;">Passwort</div><input type="password" name="ht_password" style="width: 150px;" maxlength="64" /> <span class="small_info">Länge: 2-64 Zeichen. Erlaubt: A-Z a-z 0-9 _ - + * / # .</span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><div style="width: 90px; display: inline-block; font-style: italic;">Wiederholen</div><input type="password" name="ht_password_2" style="width: 150px;" maxlength="64" /></td>
+					</tr>
+				</table>
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit_access_protection" value="Speichern" />
+			</div>
+		</form>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Temperaturüberwachung</span>
+		</div>
+		<form action="?s=settings&amp;do=pic" method="post">
+			<div class="inner-bottom">
+				Aktiviere diese Option, um von deinem Raspberry Pi, beim Überschreiten einer bestimmten Temperatur benachrichtigt zu werden. Für diesen Fall lassen sich auch spezifische Verhalten festlegen.
+			</div>
+{if="$config_temp_option_timeout > 0"}
+			<div class="inner-bottom">
+				<strong class="red">Restzeit bis E-Mail-Senden und Befehl erneut bei Überschreitung ausgeführt werden: {$temp_option_timeout_remain}</strong>
+			</div>
+{/if}
+			<div class="inner-bottom">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 200px;"><strong>Überwachung aktivieren?</strong></td>
+						<td><input type="checkbox" name="cb_activate" value="checked" {if="($config_temp != '' && !isset($_POST['submit_temperatur'])) || (isset($_POST['submit_temperatur'], $_POST['cb_activate']) && $_POST['cb_activate'] == 'checked')"}checked{/if} /></td>
+					</tr>
+					<tr>
+						<td><strong>Höchsttemperatur:</strong></td>
+						<td><select name="query">
+									<option style="background: #30FF00;" value="40" {if="$config_temp_celsius == 40"}selected="selected"{/if}>40 °C</option>
+									<option style="background: #55FF00;" value="45" {if="$config_temp_celsius == 45"}selected="selected"{/if}>45 °C</option>
+									<option style="background: #80FF00;" value="50" {if="$config_temp_celsius == 50"}selected="selected"{/if}>50 °C</option>
+									<option style="background: #AAFF00;" value="55" {if="$config_temp_celsius == 55"}selected="selected"{/if}>55 °C</option>
+									<option style="background: #D5FF00;" value="60" {if="$config_temp_celsius == 60"}selected="selected"{/if}>60 °C</option>
+									<option style="background: #FFFF00;" value="65" {if="$config_temp_celsius == 65"}selected="selected"{/if}>65 °C</option>
+									<option style="background: #FFD500;" value="70" {if="$config_temp_celsius == 70"}selected="selected"{/if}>70 °C</option>
+									<option style="background: #FFAA00;" value="75" {if="$config_temp_celsius == 75"}selected="selected"{/if}>75 °C</option>
+									<option style="background: #FF8000;" value="80" {if="$config_temp_celsius == 80"}selected="selected"{/if}>80 °C</option>
+									<option style="background: #FF5500;" value="85" {if="$config_temp_celsius == 85"}selected="selected"{/if}>85 °C</option>
+									<option style="background: #FF2B00;" value="90" {if="$config_temp_celsius == 90"}selected="selected"{/if}>90 °C</option>
+								</select></td>
+					</tr>
+					<tr>
+						<td><strong>Verhalten:</strong></td>
+						<td><label><input type="checkbox" name="cb_mail" value="checked" {if="($config_temp_mail != '' && !isset($_POST['submit_temperatur'])) || (isset($_POST['submit_temperatur'], $_POST['cb_mail']) && $_POST['cb_mail'] == 'checked')"}checked{/if} /> <div style="width: 120px; display: inline-block;">E-Mail senden</div></label><input type="text" name="ip_mail" style="width: 200px;" {if="$config_temp_mail != '' && !isset($_POST['submit_temperatur'])"}value="{$config_temp_mail}"{elseif="isset($_POST['submit_temperatur'], $_POST['ip_mail']) && $_POST['ip_mail'] != ''"}value="{$_POST['ip_mail']}"{/if} /> {if="$config_temp_mail_code == '' && $config_temp_mail != ''"}<strong><a href="{$temp_monitoring_url}confirmation&amp;referer={$temp_mail_referer|urlencode}&amp;mail={$config_temp_mail|urlencode}&amp;id={$config_temp_mail_id}" class="red" target="_blank">Jetzt bestätigen</a></strong> &bull; <strong><a href="?s=settings&amp;do=pic&amp;mail_check">Überprüfen</a></strong>{elseif="$config_temp_mail_code != ''"}<strong class="green">Bestätigt</strong>{/if}</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><label><input type="checkbox" name="cb_command" value="checked" {if="($config_temp_command != '' && !isset($_POST['submit_temperatur'])) || (isset($_POST['submit_temperatur'], $_POST['cb_command']) && $_POST['cb_command'] == 'checked')"}checked{/if} /> <div style="width: 120px; display: inline-block;">Shell-Befehl</div></label><input type="text" name="ip_command" style="width: 200px;" {if="$config_temp_command != '' && !isset($_POST['submit_temperatur'])"}value="{$config_temp_command|base64_decode}"{elseif="isset($_POST['submit_temperatur'], $_POST['ip_command']) && $_POST['ip_command'] != ''"}value="{$_POST['ip_command']}"{/if} /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><label><input type="checkbox" name="cb_shutdown" value="checked" {if="($config_temp_shutdown != '' && !isset($_POST['submit_temperatur'])) || (isset($_POST['submit_temperatur'], $_POST['cb_shutdown']) && $_POST['cb_shutdown'] == 'checked')"}checked{/if} /> <div style="width: 120px; display: inline-block;">Herunterfahren</div></label></td>
+					</tr>
+				</table>
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit_temperatur" value="Speichern" />
+			</div>
+		</form>
+	</div>
+</div>

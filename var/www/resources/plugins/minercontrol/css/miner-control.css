@@ -1,0 +1,219 @@
+
+#content {
+	max-width: 75% !important;
+}
+
+#head {
+	font-size: 18px;
+	line-height: 18px;
+	border-bottom: 1px solid #cccccc;
+	padding: 5px;
+}
+
+#clear {
+    clear: both;
+    height: 20px;
+}
+
+.left20 {
+    padding-left: 20px;
+}
+.left {
+    float: left;
+	line-height: 25px;
+}
+
+#new_miner {
+	display:none;
+}
+
+#add_new_miner {
+	width: 200px;
+	margin: 20px auto;
+	background: #0066ff none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    line-height: 22px;
+    overflow: auto;
+    text-align: center;
+}
+
+.abort_new {
+	background: #8F0000 none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    line-height: 22px;
+    overflow: auto;
+    text-align: center;
+    width: 15% !important;
+	margin-right: 20px;
+}
+
+.abort {
+	background: #8F0000 none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    line-height: 22px;
+    overflow: auto;
+    text-align: center;
+    width: 15% !important;
+	margin-right: 20px;
+}
+
+.delete {
+	background: #A54C4D none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    line-height: 22px;
+    overflow: auto;
+    text-align: center;
+    width: 15% !important;
+	margin-right: 20px;
+}
+
+.new_miner_token {
+    width: 70%;
+}
+.right20 {
+    padding-right: 20px;
+}
+.right {
+    float: right;
+	width: 70%;
+}
+
+.new_miner_transactionhash textarea {
+    border: 1px solid #b9bdc1;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px #bbb inset;
+    color: #797979;
+    font-size: 20px;
+    width: 100%;
+}
+
+.new_miner_token textarea {
+    border: 1px solid #b9bdc1;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px #bbb inset;
+    color: #797979;
+    font-size: 20px;
+    width: 100%;
+}
+
+.miner_transactionhash textarea {
+    border: 1px solid #b9bdc1;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px #bbb inset;
+    color: #797979;
+    font-size: 20px;
+    width: 100%;
+}
+
+.miner_token textarea {
+    border: 1px solid #b9bdc1;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px #bbb inset;
+    color: #797979;
+    font-size: 20px;
+    width: 100%;
+}
+
+.save_new_miner {
+    background: #0066ff none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    line-height: 22px;
+    overflow: auto;
+    text-align: center;
+    width: 15%;
+}
+
+#minerlistheader {
+	border-bottom: 1px solid #cccccc;
+	overflow: auto;
+
+}
+
+#minerlistheader div {
+	float:left;
+	width:14%;
+	text-align: center;
+	border-right: 1px solid #cccccc;
+	line-height: 20px;
+}
+
+#minerlistheader #last {
+	border-right: none;
+}
+
+#minerlist {
+	overflow: auto;
+	border-bottom: 1px solid #cccccc;
+}
+
+#minerlist div {
+	float:left;
+	width:14%;
+	text-align: center;
+	border-right: 1px solid #cccccc;
+	line-height: 20px;
+}
+
+#minerlist #last {
+	border-right: none;
+	cursor: pointer;
+}
+
+#minerlistfooter {
+	overflow: auto;
+}
+
+#minerlistfooter #last {
+	border-right: none;
+}
+
+#minerlistfooter div {
+	float:left;
+	width:14%;
+	text-align: center;
+	border-right: 1px solid #cccccc;
+	line-height: 20px;
+}
+
+#editMiner {
+	display: none;
+	position: fixed;
+	width: 40%;
+	margin: auto;
+	z-index: 2;
+	background: #fff none repeat scroll 0 0;
+	top: 15%;
+	left: 30%;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+	overflow-y: scroll;
+}
+
+.save_miner {
+	background: #0066ff none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    line-height: 22px;
+    overflow: auto;
+    text-align: center;
+    width: 15% !important;
+	margin-right: 10px;
+}
+
+input {
+border: 1px solid #b9bdc1;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px #bbb inset;
+    color: #797979;
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}

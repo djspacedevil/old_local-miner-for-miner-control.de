@@ -1,0 +1,44 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>Statistik</span>
+		</div>
+		<div class="inner">
+			<table class="table">
+				<tr>
+					<th>Plugins</th>
+					<th>Anzahl</th>
+				</tr>
+				<tr>
+					<td>Insgesamt</td>
+					<td>{$plugins_total}</td>
+				</tr>
+				<tr>
+					<td>Installiert</td>
+					<td>{$plugins_installed}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Plugin Suche</span>
+		</div>
+		<div class="inner">
+		{loop="$plugins"}
+			<a href="?s=plugin_search&amp;do=information&amp;id={$value.id}" style="color: inherit; text-decoration: none;">
+				<table class="table_simple table_plugins_list">
+					<tr {if="$counter%2"}class="table_impo_blue"{/if}>
+						<td><span>{$value.name}</span><br /><span>Version {$value.version}</span>{if="getPluginInfo($value.id, 'id') == $value.id"}{if="getPluginInfo($value.id, 'status') == 'disable'"}<br /><strong class="small orange">Deaktiviert</strong>{else}<br /><strong class="small green">Installiert</strong>{/if}{if="is_array($update_plugins) && isset($update_plugins[$value.id])"} / <strong class="small orange">Update</strong>{/if}{/if}</td>
+						<td>{$value.description}</td>
+					</tr>
+				</table>
+			</a>
+		{/loop}
+		</div>
+	</div>
+</div>

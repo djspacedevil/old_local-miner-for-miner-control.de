@@ -1,0 +1,39 @@
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Einstellungen zur Übersicht</span>
+			{function="showGoBackIcon('?s=settings')"}
+		</div>
+		<form action="?s=settings&amp;do=overview" method="post">
+			<div class="inner-bottom">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 300px;"><strong>Sekunden bis Übersicht aktualisiert wird:</strong></td>
+						<td><input type="text" name="value" value="{$overview_reload_time}" style="width: 80px;" /></td>
+					</tr>
+					<tr>
+						<td><strong>Zeige "Angeschlossene Geräte" an:</strong></td>
+						<td><input type="checkbox" name="connected_devices" value="checked" {if="$overview_connected_devices"}checked{/if} /> <span style="font-size: 11px; color: #AAAAAA;">Das aktivieren verursacht eine längere Ladezeit der Übersicht.</span></td>
+					</tr>
+					<tr>
+						<td><strong>Zeige "Wetter" an:</strong></td>
+						<td><input type="checkbox" name="weather" value="checked" {if="$overview_weather"}checked{/if} /></td>
+					</tr>
+					<tr>
+						<td><strong>Postleitzahl für Wetter:</strong></td>
+						<td><input type="text" name="weather_postcode" value="{$weather_postcode}" maxlength="5" style="width: 80px;" /> {if="is_array($weather_city_status)"}{$weather_city_status.city}, {$weather_city_status.country}{elseif="$weather_city_status === 1"}<strong class="red">Server nicht erreichbar!</strong>{/if}<br />
+							<select name="weather_country">
+								<option value="germany" {if="$weather_country == 'germany'"}selected="selected"{/if}>Deutschland</option>
+								<option value="austria" {if="$weather_country == 'austria'"}selected="selected"{/if}>Österreich</option>
+								<option value="swiss" {if="$weather_country == 'swiss'"}selected="selected"{/if}>Schweiz</option>
+							</select></td>
+					</tr>
+				</table>
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit" value="Speichern" />
+			</div>
+		</form>
+	</div>
+</div>

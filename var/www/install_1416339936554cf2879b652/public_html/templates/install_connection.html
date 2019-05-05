@@ -1,0 +1,54 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>Fortschritt</span>
+		</div>
+		<div class="inner">
+			<div style="background: #E3E3E3; border-radius: 5px; box-shadow: 0px 0px 1px #AAAAAA; margin-bottom: 10px;"><div style="width: 50%; height: 10px; background: #3399FF; border-radius: 5px; box-shadow: 0px 0px 1px #0099FF;"></div></div>
+			Installation zu 50% abgeschlossen.
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+{if="$ssh_login_check === false"}
+		<div class="inner-header">
+			<span>2. Schritt</span>
+		</div>
+		<div class="inner-bottom" align="justify">
+			In diesem Schritt müssen die Anmeldeinformationen für den Raspberry Pi Benutzer eingegeben werden. Die Daten werden verschlüsselt auf deinem Raspberry Pi gespeichert und nur zur Nutzung von systemseitigen Funktionen genutzt.
+		</div>
+		<form action="?s=install_connection&amp;send" method="post">
+			<div class="inner-bottom">
+				<table width="100%">
+					<tr>
+						<td style="width: 50%;">SSH-Port</td>
+						<td><input type="text" name="port" style="width: 50px;" value="{$port}" maxlength="5" /> <span class="small_info">Standard: 22</span></td>
+					</tr>
+					<tr>
+						<td>SSH-Benutzername</td>
+						<td><input type="text" name="username" style="width: 100%;" value="{$username}" /></td>
+					</tr>
+					<tr>
+						<td>SSH-Passwort</td>
+						<td><input type="password" name="password" style="width: 100%;" /></td>
+					</tr>
+				</table>
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit" value="Weiter" />
+			</div>
+		</form>
+{else}
+		<div class="inner-bottom">
+			<strong class="green">Verbindung zum Raspberry Pi wurde hergestellt.</strong>
+		</div>
+		<div class="inner">
+			<a href="?s=install_settings" style="text-decoration: none;"><input type="button" value="N&auml;chster Schritt" /></a>
+		</div>
+{/if}
+	</div>
+</div>
+<div class="clear_both"></div>

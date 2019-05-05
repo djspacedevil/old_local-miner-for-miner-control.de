@@ -1,0 +1,38 @@
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Einstellungen zu Plugins</span>
+			{function="showGoBackIcon('?s=settings')"}
+		</div>
+		<div class="inner">
+{loop="$all_plugins"}
+			<table class="table_simple table_plugins_list_settings">
+				<tr {if="$counter%2"}class="table_impo_blue"{/if}>
+					<td><span>{$value.name}</span><br /><span>Version {$value.version}</span>
+{if="$value.min_version > $config_versioncode"}
+						<br /><span class="red">Plugin ist nicht kompatibel {function="showHelper('plugin_ist_nicht_kompatibel')"}</span>
+{/if}</td>
+					<td>
+{if="$value.status == 'enable'"}
+						<a href="?s=settings&amp;do=plugins&amp;id={$value.id}&amp;status=disable">Deaktivieren</a><br />
+{else}
+						<a href="?s=settings&amp;do=plugins&amp;id={$value.id}&amp;status=enable">Aktivieren</a><br />
+{/if}
+
+{if="$value.settings == 'available' && $value.min_version <=  $config_versioncode && $value.status == 'enable'"}
+						<a href="?s=plugins&amp;id={$value.id}&amp;settings">Einstellungen</a><br />
+{elseif="$value.settings == 'available' && ($value.min_version > $config_versioncode || $value.status == 'disable')"}
+						<span class="disabled_link">Einstellungen</span><br />
+{else}
+						<br />
+{/if}
+						<a href="?s=settings&amp;do=plugins&amp;id={$value.id}&amp;delete">Löschen</a></td>
+					<td>{$value.description}</td>
+				</tr>
+			</table>
+{else}
+			<strong class="red">Keine Plugins installiert.</strong>
+{/loop}
+		</div>
+	</div>
+</div>

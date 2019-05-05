@@ -1,0 +1,32 @@
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Einstellungen zur Statistik</span>
+			{function="showGoBackIcon('?s=settings')"}
+		</div>
+		<form action="?s=settings&amp;do=statistic" method="post">
+			<div class="inner-bottom">
+				<table class="table">
+					<tr>
+						<th style="width: 5%;">Anzeigen</th>
+						<th style="width: 85%;">Name</th>
+						<th style="width: 10%;"></th>
+					</tr>
+{loop="$logArray"}
+					<tr>
+						<td align="center"><input type="checkbox" name="check[]" value="{$value.log}" {if="$value.display == 1"}checked="checked"{/if} /></td>
+						<td>{$value.label}</td>
+						<td><a href="?s=settings&amp;do=statistic&amp;reset={$value.log|urlencode}">Zurücksetzen</a></td>
+					</tr>
+{/loop}
+				</table>
+				<br />
+				Statistiken werden, unabhängig vom Anzeigestatus, geloggt.
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit" value="Speichern" />
+			</div>
+		</form>
+	</div>
+</div>

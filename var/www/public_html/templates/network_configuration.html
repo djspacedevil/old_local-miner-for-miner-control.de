@@ -1,0 +1,55 @@
+<script type="text/javascript">{$js_variables}</script>
+<script type="text/javascript" src="public_html/js/network_interface_refresh.js"></script>
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-bottom sidebar_navi padding-0">
+			<a href="?s=network">Übersicht</a>
+		</div>
+		<div class="inner sidebar_navi padding-0">
+			<a href="?s=network_configuration">Konfiguration</a>
+		</div>
+	</div>
+	<div class="box network_status" style="display: none;">
+		<div class="inner-header">
+			<span>Status</span>
+		</div>
+		<div class="inner">
+		
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Netzwerkkonfiguration</span>
+		</div>
+{if="$interface_loopback <= 1"}
+		<div class="inner-bottom">
+			<strong class="red">Es wurde ein Problem in der Konfigurationsdatei festgestellt. Die Datei ist womöglich nicht richtig konfiguriert. Daher kann es zu Problemen kommen.</strong>
+		</div>
+{/if}
+		<div class="inner-bottom">
+			<table class="table">
+				<tr>
+					<th style="width: 45%;">Interface</th>
+					<th style="width: 20%;">Protokoll</th>
+					<th style="width: 20%;">Methode</th>
+					<th style="width: 15%;"></th>
+				</tr>
+{loop="$interfaces"}
+				<tr>
+					<td>{$value.0.1}</td>
+					<td>{function="formatInterfaceProtocol($value.0.2)"}</td>
+					<td>{function="formatInterfaceMethod($value.0.3)"}</td>
+					<td style="text-align: center; vertical-align: middle;"><a href="?s=network_configuration&amp;edit={$value.0.1}" style="margin-right: 8px;"><img src="public_html/img/edit.png" style="width: 16px; vertical-align: middle;" /></a><a href="?s=network_configuration&amp;delete={$value.0.1}" style="margin-right: 8px;"><img src="public_html/img/delete.png" style="width: 16px; vertical-align: middle;" /></a><a href="#" name="refresh" lang="{$value.0.1}"><img src="public_html/img/refresh_black.png" style="width: 16px; vertical-align: middle;" /></a></td>
+				</tr>
+{/loop}
+			</table>
+		</div>
+		<div class="inner">
+			<a href="?s=network_configuration&amp;new"><button>Hinzufügen</button></a>
+		</div>
+	</div>
+</div>

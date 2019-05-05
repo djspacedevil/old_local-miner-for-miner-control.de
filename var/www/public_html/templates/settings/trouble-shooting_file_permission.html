@@ -1,0 +1,20 @@
+<script type="text/javascript">{$js_variables}</script>
+<script type="text/javascript" src="public_html/js/settings_file_permission.js"></script>
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Datei- und Ordnerberechtigungen</span>
+			{function="showGoBackIcon('?s=settings&do=trouble-shooting')"}
+		</div>
+		<div class="inner-bottom">
+			Möchtest du wirklich fortfahren? Folgende Befehle werden ausgeführt:<br />
+			- sudo chown -R {$file_permission_whoaim}:{$file_permission_whoaim} {$file_permission_absolute_path}/<br />
+			- sudo find {$file_permission_absolute_path}/ -type d -exec chmod 755 {} +<br />
+			- sudo find {$file_permission_absolute_path}/ -type f -exec chmod 644 {} +
+		</div>
+		<div class="inner file_permission_status">
+			<a href="?s=settings&amp;do=trouble-shooting&amp;file_permission=confirm" onClick="file_permission(); return false;"><input type="button" value="Ausführen" /></a>
+		</div>
+	</div>
+</div>

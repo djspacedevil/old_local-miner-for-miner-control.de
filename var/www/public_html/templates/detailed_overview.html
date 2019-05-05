@@ -1,0 +1,160 @@
+<!-- Container -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Detaillierte Übersicht</span>
+		</div>
+		<div class="inner">
+			<h3>Allgemein</h3>
+			<div style="padding: 0px 10px 30px 10px;">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 30%;"><strong>Raspberry Pi Model</strong></td>
+						<td>{$revision.model}</td>
+					</tr>
+					<tr>
+						<td><strong>Hersteller</strong></td>
+						<td>{$revision.manufacturer}</td>
+					</tr>
+					<tr>
+						<td><strong>Revision</strong></td>
+						<td>{$revision.revision}</td>
+					</tr>
+					<tr>
+						<td><strong>PCB Revision (Bauserie)</strong></td>
+						<td>{$revision.pcb}</td>
+					</tr>
+					<tr>
+						<td><strong>Seriennummer</strong></td>
+						<td>{$serial}</td>
+					</tr>
+					<tr>
+						<td><strong>Laufzeit</strong></td>
+						<td>{$run_time}</td>
+					</tr>
+					<tr>
+						<td><strong>Letzter Start</strong></td>
+						<td>{$start_time}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<h3>Software</h3>
+			<div style="padding: 0px 10px 30px 10px;">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 30%;"><strong>Distribution</strong></td>
+						<td>{$distribution}</td>
+					</tr>
+					<tr>
+						<td><strong>Kernel</strong></td>
+						<td>{$kernel}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<h3>CPU</h3>
+			<div style="padding: 0px 10px 30px 10px;">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 30%;"><strong>Takt</strong></td>
+						<td>{$cpu_clock}</td>
+					</tr>
+					<tr>
+						<td><strong>Maximaler Takt</strong></td>
+						<td>{$cpu_max_clock}</td>
+					</tr>
+					<tr>
+						<td><strong>Auslastung</strong></td>
+						<td><div class="overview_status_td" style="max-width: 200px;">
+								<div class="progress">
+									<div style="width: {$cpu_load};"></div>
+									<div>{$cpu_load}</div>
+								</div>
+							</div></td>
+					</tr>
+					<tr>
+						<td><strong>Typ</strong></td>
+						<td>{$cpu_type}</td>
+					</tr>
+					<tr>
+						<td><strong>Model</strong></td>
+						<td>{$cpu_model}</td>
+					</tr>
+					<tr>
+						<td><strong>Temperatur</strong></td>
+						<td>{$cpu_temp}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<h3>RAM</h3>
+			<div style="padding: 0px 10px 30px 10px;">
+				<table class="table_simple">
+					<tr>
+						<td style="width: 30%;"><strong>Gesamt</strong></td>
+						<td>{$revision.memory} MB</td>
+					</tr>
+					<tr>
+						<td><strong>Auslastung</strong></td>
+						<td><div class="overview_status_td" style="max-width: 200px;">
+								<div class="progress">
+									<div style="width: {$ram_percentage};"></div>
+									<div>{$ram_percentage}</div>
+								</div>
+							</div></td>
+					</tr>
+				</table>
+			</div>
+			
+			<h3>Systemspeicher</h3>
+			<div style="padding: 0px 10px 0px 10px;">
+				<table class="table">
+					<tr>
+						<th style="width: 20%;">Partition</th>
+						<th style="width: 10%;">Mountpunkt</th>
+						<th style="width: 10%;">Belegt</th>
+						<th style="width: 10%;">Frei</th>
+						<th style="width: 10%;">Gesamt</th>
+						<th style="width: 40%;"></th>
+					</tr>
+{loop="$memory"}
+	{if="$counter < $memory_count-1"}
+					<tr>
+						<td>{$value.device}</td>
+						<td>{$value.mountpoint}</td>
+						<td>{$value.used|sizeUnit}</td>
+						<td>{$value.free|sizeUnit}</td>
+						<td>{$value.total|sizeUnit}</td>
+						<td class="padding-0">
+							<div class="overview_status_td">
+								<div class="progress">
+									<div style="width: {$value.percent}%;"></div>
+									<div>{$value.percent}%</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+	{else}
+					<tr style="background: #A6C5E8; font-weight: bold;">
+						<td>Gesamt</td>
+						<td></td>
+						<td>{$value.used|sizeUnit}</td>
+						<td>{$value.free|sizeUnit}</td>
+						<td>{$value.total|sizeUnit}</td>
+						<td class="padding-0">
+							<div class="overview_status_td">
+								<div class="progress">
+									<div style="width: {$value.percent}%;"></div>
+									<div>{$value.percent}%</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+	{/if}
+{/loop}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

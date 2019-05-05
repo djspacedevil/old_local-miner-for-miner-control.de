@@ -1,0 +1,37 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>Fortschritt</span>
+		</div>
+		<div class="inner">
+			<div style="background: #E3E3E3; border-radius: 5px; box-shadow: 0px 0px 1px #AAAAAA; margin-bottom: 10px;"><div style="width: 75%; height: 10px; background: #3399FF; border-radius: 5px; box-shadow: 0px 0px 1px #0099FF;"></div></div>
+			Installation zu 75% abgeschlossen.
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>3. Schritt</span>
+		</div>
+		<div class="inner-bottom" align="justify">
+			Bitte gebe nachfolgend den Port deines Webservers an, sollte der automatisch ermittelte Wert nicht übereinstimmen.
+		</div>
+		<form action="?s=install_settings&amp;send" method="post">
+			<div class="inner-bottom">
+				<table width="100%">
+					<tr>
+						<td style="width: 50%;">Webserver-Port</td>
+						<td><input type="text" name="port" style="width: 50px;" value="{$port}" maxlength="5" /></td>
+					</tr>
+				</table>
+			</div>
+			<div class="inner">
+				<input type="submit" name="submit" value="Weiter" />
+			</div>
+		</form>
+	</div>
+</div>
+<div class="clear_both"></div>

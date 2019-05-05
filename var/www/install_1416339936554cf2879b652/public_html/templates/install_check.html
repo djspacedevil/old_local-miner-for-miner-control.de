@@ -1,0 +1,106 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>Fortschritt</span>
+		</div>
+		<div class="inner">
+			<div style="background: #E3E3E3; border-radius: 5px; box-shadow: 0px 0px 1px #AAAAAA; margin-bottom: 10px;"><div style="width: 25%; height: 10px; background: #3399FF; border-radius: 5px; box-shadow: 0px 0px 1px #0099FF;"></div></div>
+			Installation zu 25% abgeschlossen.
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>1. Schritt</span>
+		</div>
+		<div class="inner" align="justify">
+			Nachfolgend stehen alle Anforderungen, die für die Verwendung des Pi Control pflicht bzw. optional sind. Pflicht-Anforderungen sind elementar und müssen erfüllt sein, Optional-Anforderungen bieten dir später einen größeren und besseren Funktionsumfang.
+		</div>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Pflicht</span>
+		</div>
+		<div class="inner">
+			<table width="100%" cellpadding="5">
+				<tr>
+					<td width="50%">Unterst&uuml;tze SSH</td>
+					<td>{if="$cf_ssh == 1"}<strong class="green">verf&uuml;gbar</strong>{else}<strong class="red">nicht verf&uuml;gbar. <a href="http://willy-tech.de/ssh-fur-php-einrichten">Installieren?</a></strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">Ordner-Berechtigungen<br /><span style="font-size: 11px; color: #AAAAAA;">Berechtigung um Ordner zu öffnen und Dateien zu schreiben. Vorraussetzung: 755.</span></td>
+					<td>{if="$cf_folder_1 != 1 || $cf_folder_2 != 1 || $cf_folder_3 != 1"}<strong class="red">Fehler {function="showHelper('fehler-bei-der-installation-mit-den-ordner-berechtigungen')"}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;../resources/config/</td>
+					<td>{if="$cf_folder_1 == 1"}<strong class="green">755</strong>{elseif="$cf_folder_1 == 2"}<strong class="red">Ordner existiert nicht</strong>{elseif="is_array($cf_folder_1)"}<strong class="red">Benutzer "{$cf_folder_1[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_folder_1}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;resources/temp/</td>
+					<td>{if="$cf_folder_2 == 1"}<strong class="green">755</strong>{elseif="$cf_folder_2 == 2"}<strong class="red">Ordner existiert nicht</strong>{elseif="is_array($cf_folder_2)"}<strong class="red">Benutzer "{$cf_folder_2[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_folder_2}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;../install/</td>
+					<td>{if="$cf_folder_3 == 1"}<strong class="green">755</strong>{elseif="$cf_folder_3 == 2"}<strong class="red">Ordner existiert nicht</strong>{elseif="is_array($cf_folder_3)"}<strong class="red">Benutzer "{$cf_folder_3[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_folder_3}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">Datei-Berechtigungen<br /><span style="font-size: 11px; color: #AAAAAA;">Berechtigung um Dateien zu öffnen, schreiben und zu lesen. Vorraussetzung: 644.</span></td>
+					<td>{if="$cf_file_1 != 1 || $cf_file_2 != 1 || $cf_file_3 != 1 || $cf_file_4 != 1"}<strong class="red">Fehler {function="showHelper('fehler-bei-der-installation-mit-den-datei-berechtigungen')"}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;../resources/config/config.php</td>
+					<td>{if="$cf_file_1 == 1"}<strong class="green">644</strong>{elseif="$cf_file_1 == 2"}<strong class="red">Datei existiert nicht</strong>{elseif="is_array($cf_file_1)"}<strong class="red">Benutzer "{$cf_file_1[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_file_1}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;../resources/config/config_ssh.php</td>
+					<td>{if="$cf_file_2 == 1"}<strong class="green">644</strong>{elseif="$cf_file_2 == 2"}<strong class="red">Datei existiert nicht</strong>{elseif="is_array($cf_file_2)"}<strong class="red">Benutzer "{$cf_file_2[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_file_2}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;../resources/config/config_uniqid.php</td>
+					<td>{if="$cf_file_3 == 1"}<strong class="green">644</strong>{elseif="$cf_file_3 == 2"}<strong class="red">Datei existiert nicht</strong>{elseif="is_array($cf_file_3)"}<strong class="red">Benutzer "{$cf_file_3[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_file_3}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;resources/temp/config_datas.php</td>
+					<td>{if="$cf_file_4 == 1"}<strong class="green">644</strong>{elseif="$cf_file_4 == 2"}<strong class="red">Datei existiert nicht</strong>{elseif="is_array($cf_file_4)"}<strong class="red">Benutzer "{$cf_file_4[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_file_4}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;resources/temp/config_settings.php</td>
+					<td>{if="$cf_file_5 == 1"}<strong class="green">644</strong>{elseif="$cf_file_5 == 2"}<strong class="red">Datei existiert nicht</strong>{elseif="is_array($cf_file_5)"}<strong class="red">Benutzer "{$cf_file_5[1]}" hat nicht genügend Berechtigungen</strong>{else}<strong class="red">Falsche Berechtigung: {$cf_file_5}</strong>{/if}</td>
+				</tr>
+				<tr>
+					<td width="50%">Funktion zur Verschlüsselung<br /><span style="font-size: 11px; color: #AAAAAA;">Info: Funktion mittels "sudo apt-get install php5-mcrypt" nachinstallieren.</span></td>
+					<td>{if="$cf_mcrypt == 1"}<strong class="green">verf&uuml;gbar</strong>{else}<strong class="red">nicht verf&uuml;gbar. Info beachten!</strong>{/if}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Optional</span>
+		</div>
+		<div class="inner">
+			<table width="100%" cellpadding="5">
+				<tr valign="top">
+					<td width="50%">Funktion zum Laden externer Inhalte: allow_url_fopen()<br /><span style="font-size: 11px; color: #AAAAAA;">Für Update-Funktion und Plugins benötigt.</span></td>
+					<td>{if="$cf_auf == 1"}<strong class="green">verf&uuml;gbar</strong>{else}<strong class="red">nicht verf&uuml;gbar</strong>{/if}</td>
+				</tr>
+				<tr valign="top">
+					<td>Klasse zum Entpacken von Dateien: ZipArchive<br /><span style="font-size: 11px; color: #AAAAAA;">Für Update-Funktion und Plugins benötigt.</span></td>
+					<td>{if="$cf_zipa == 1"}<strong class="green">verf&uuml;gbar</strong>{else}<strong class="red">nicht verf&uuml;gbar</strong>{/if}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="box">
+		<div class="inner-bottom" align="justify">
+			Sind alle Pflicht-Anforderungen erfüllt, kannst du die Installation fortsetzen, andernfalls behebe bitte das Problem.
+		</div>
+		<div class="inner">
+			<a href="?s=install_check&amp;next" style="text-decoration: none;"><input type="button" value="N&auml;chster Schritt" /></a>
+		</div>
+	</div>
+</div>
+<div class="clear_both"></div>

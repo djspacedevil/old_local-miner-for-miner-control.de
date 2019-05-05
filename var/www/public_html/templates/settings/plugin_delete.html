@@ -1,0 +1,25 @@
+<!-- Content -->
+<div>
+	<div class="box">
+		<div class="inner-header">
+			<span>Einstellungen zu Plugins</span>
+			{function="showGoBackIcon('?s=settings&do=plugins')"}
+		</div>
+		<div class="inner-bottom">
+			Bist du sicher, dass du das Plugin löschen willst? Es gehen alle gespeicherten Daten des Plugins verloren, der Vorgang kann nicht rückgängig gemacht werden!<br /><br />
+			<table class="table_simple">
+				<tr>
+					<td style="width: 120px;"><strong>Plugin:</strong></td>
+					<td>{$plugin.name}</td>
+				</tr>
+				<tr>
+					<td><strong>Version:</strong></td>
+					<td>{$plugin.version}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="inner">
+			<a href="{$server_request_uri}=true"><button>Unwiderruflich löschen</button></a>
+		</div>
+	</div>
+</div>

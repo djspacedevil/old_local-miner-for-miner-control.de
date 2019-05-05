@@ -1,0 +1,33 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>Fortschritt</span>
+		</div>
+		<div class="inner">
+			<div style="background: #E3E3E3; border-radius: 5px; box-shadow: 0px 0px 1px #AAAAAA; margin-bottom: 10px;"><div style="width: 0%; height: 10px; background: #3399FF; border-radius: 5px; box-shadow: 0px 0px 1px #0099FF;"></div></div>
+			Installation zu 0% abgeschlossen.
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Vorwort</span>
+		</div>
+		<div class="inner-bottom" align="justify">
+			Willkommen zur Installation des Pi Control für deinen Raspberry Pi!<br /><br />
+			Die Installation f&uuml;hrt dich durch eine Reihe von Schritten und dauert etwa zwei Minuten. Rechts findest du einen Fortschrittsbalken, der dich über den Stand der Installation informiert.<br /><br />
+			Nun kann's losgehen.
+		</div>
+		<div class="inner">
+{if="is_array($update_picontrol)"}
+			<input type="button" value="N&auml;chster Schritt" style="opacity: 0.5;" /> <strong class="red">Es steht ein Update zur Verfügung: {$update_picontrol.version}. <a href="http://willy-tech.ziix.de/raspberry-pi-control-center" target="_blank">Herunterladen</a></strong>
+{else}
+			<a href="?s=install_check" style="text-decoration: none;"><input type="button" value="N&auml;chster Schritt" /></a>
+{/if}
+		</div>
+	</div>
+</div>
+<div class="clear_both"></div>

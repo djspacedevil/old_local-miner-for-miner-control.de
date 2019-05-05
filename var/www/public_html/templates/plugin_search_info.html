@@ -1,0 +1,110 @@
+<!-- Sidebar -->
+<div class="sidebar">
+	<div class="box">
+		<div class="inner-header">
+			<span>Aktion</span>
+		</div>
+		<div class="inner">
+{if="ifPluginExists($plugin.id)"}
+{if="ifPluginDisable($plugin.id)"}
+			<a href="?s=plugin_search&amp;do=information&amp;id={$plugin.id}&amp;status=enable"><button class="width-100">Aktivieren</button></a><br /><br />
+{else}
+			<a href="?s=plugin_search&amp;do=information&amp;id={$plugin.id}&amp;status=disable"><button class="width-100">Deaktivieren</button></a><br /><br />
+{if="is_array($update_plugins) && isset($update_plugins[$plugin.id])"}
+			<a href="?s=plugin_search&amp;do=information&amp;id={$plugin.id}&amp;update"><button class="width-100">Aktualisieren</button></a><br /><br />
+{/if}
+{/if}
+			<a href="?s=plugin_search&amp;do=information&amp;id={$plugin.id}&amp;delete"><button class="width-100">Löschen</button></a>
+{else}
+{if="!($plugin.minversion > $config_versioncode)"}
+			<a href="?s=plugin_search&amp;do=information&amp;id={$plugin.id}&amp;install"><button class="width-100">Installieren</button></a>
+{else}
+			<button class="width-100" style="opacity: 0.5;">Insallieren</button>
+{/if}
+{/if}
+		</div>
+	</div>
+</div>
+<!-- Container -->
+<div class="container-600">
+	<div class="box">
+		<div class="inner-header">
+			<span>Plugin Informationen</span>
+			{function="showGoBackIcon('?s=plugin_search')"}
+		</div>
+		<div class="inner{if="ifPluginExists($plugin.id) || $plugin.minversion > $config_versioncode"}-bottom{/if}">			
+{if="ifPluginExists($plugin.id)"}
+			<strong class="green">Das Plugin ist bereits installiert.</strong>
+{if="is_array($update_plugins) && isset($update_plugins[$plugin.id])"}
+			<strong class="red">Es ist ein Update verfügbar.</strong>
+{/if}
+		</div>
+		<div class="inner">
+{elseif="$plugin.minversion > $config_versioncode"}
+			<strong class="red">Das Plugin ist nicht mit deinem Pi Control kompatibel. Bitte <a href="?s=settings&amp;do=update">aktualisiere</a> das Pi Control.</strong>
+		</div>
+		<div class="inner">
+{/if}
+			<table class="table_simple">
+				<tr>
+					<td style="width: 150px;">Pluginname</td>
+					<td>{$plugin.name}</td>
+				</tr>
+				<tr>
+					<td>Version</td>
+					<td>{$plugin.version}</td>
+				</tr>
+				<tr>
+					<td>Erstellt</td>
+					<td>{function="date('d.m.Y', $plugin.created)"}</td>
+				</tr>
+				<tr>
+					<td >Letze Aktualisierung</td>
+					<td>{function="date('d.m.Y', $plugin.last_update)"}</td>
+				</tr>
+				<tr>
+					<td>Beschreibung</td>
+					<td class="justify">{$plugin.description}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="clear_both"></div>
+<div>
+{if="!is_array($plugin.manual)"}
+	<div class="box">
+		<div class="inner-header">
+			<span>Anleitung</span>
+		</div>
+		<div class="inner">
+			{$plugin.manual|nl2br}
+		</div>
+	</div>
+{/if}
+{if="!is_array($plugin.requirement)"}
+	<div class="box">
+		<div class="inner-header">
+			<span>Voraussetzungen</span>
+		</div>
+		<div class="inner">
+			{$plugin.requirement|nl2br}
+		</div>
+	</div>
+{/if}
+{if="isset($plugin.screenshots.screenshot[0])"}
+	<div class="box">
+		<div class="inner-header">
+			<span>Screenshots</span>
+		</div>
+		<div class="inner">
+{if="is_string($plugin.screenshots[screenshot])"}
+			<a href="{$plugin.screenshots[screenshot]}" target="_blank" style="cursor: -webkit-zoom-in; cursor: -moz-zoom-in;"><img src="{$plugin.screenshots[screenshot]}" style="width: 100%;" /></a>
+{/if}
+{loop="$plugin.screenshots.screenshot"}
+			<a href="{$value}" target="_blank" style="cursor: -webkit-zoom-in; cursor: -moz-zoom-in;"><img src="{$value}" style="width: 49%;" /></a>
+{/loop}
+		</div>
+	</div>
+{/if}
+</div>
